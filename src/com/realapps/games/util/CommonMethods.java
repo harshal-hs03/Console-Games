@@ -32,7 +32,7 @@ public class CommonMethods {
     }
 
 //    method to return all the lines from the specified file in the form of list
-    private static List<String> getLinesFromFileInAList(String fileName){
+    public static List<String> getLinesFromFileInAList(String fileName){
         List<String> returnList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));

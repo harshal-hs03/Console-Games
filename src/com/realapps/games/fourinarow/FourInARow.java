@@ -1,4 +1,4 @@
-/*
+/**
 * ==== Four - In - A - Row ====
 *
 * Two players compete to get their letters four in a row/ column/ or in any diagonal like below :
