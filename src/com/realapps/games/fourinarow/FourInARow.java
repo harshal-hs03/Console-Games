@@ -1,9 +1,32 @@
+/*
+* ==== Four - In - A - Row ====
+*
+* Two players compete to get their letters four in a row/ column/ or in any diagonal like below :
+
+    |(D)| 0 | 0 | 0 | 0 | 0 | 0 |   // 4 same letters in any diagonal (letter D) makes player D the winner
+    | 0 |(D)| 0 | 0 | 0 | 0 | 0 |
+    | 0 | 0 |(D)| 0 | 0 | 0 |(G)|   // 4 same letters in the same column (letter G) makes player G the winner
+    | 0 | 0 | 0 |(D)| 0 | 0 |(G)|
+    | 0 | 0 | 0 | 0 | 0 | 0 |(G)|
+    | 0 |(R | R | R | R)| 0 |(G)|   // 4 same letters in the same row (letter R) makes player R the winner
+
+*
+* Enter the column numbers as input to put the letter in the specific column
+* */
+
 package com.realapps.games.fourinarow;
 
-import java.util.*;
+import com.realapps.games.util.CommonMethods;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class FourInARow {
-    // private static int[][] gameBoard = new int[6][7];
+
+//    static fields
+    private static String playerOne = "A", playerTwo = "B", currentPlayer = playerOne;
+
+//    final fields
     private static final int row = 6;
     private static final int col = 7;
     private static final String[][] gameBoard = new String[row][col];
@@ -11,11 +34,12 @@ public class FourInARow {
     private static final int[][] positionOfFourInRow = new int[4][2];
     private static final Scanner sc = new Scanner(System.in);
 
-    private static String currentPlayer = "A";
-
-    public static void main(String[] args) {
+//    start point of the game
+    public static void startGame() {
+        System.out.println("==== Four - In - A - Row ====");
         initBoard();
         printBoard();
+        setPlayerValues();
         String winner = null;
         do {
             takeInput();
@@ -42,10 +66,18 @@ public class FourInARow {
     private static void printBoard(){
         for(String[] i : gameBoard){
             for(String j : i){
-                System.out.print(j+" ");
+                System.out.print("| "+j+" ");
             }
-            System.out.println();
+            System.out.println("|");
         }
+    }
+
+//    method to set the player's input letter values to the properties defined in the game.properties file
+    private static void setPlayerValues(){
+        String p1 = CommonMethods.getPropertyFromPropertiesFile("playerOne.input.letter");
+        String p2 = CommonMethods.getPropertyFromPropertiesFile("playerTwo.input.letter");
+        currentPlayer = playerOne = (p1 == null || p1.equals(p2)) ? playerOne : p1;
+        playerTwo = (p2 == null || p2.equals(p1)) ? playerTwo : p2;
     }
 
 //    method to take input from console
@@ -74,10 +106,10 @@ public class FourInARow {
 
 //    method to change the player's turn
     private static void changeTurn(){
-        if(currentPlayer.equals("A"))
-            currentPlayer = "B";
+        if(currentPlayer.equals(playerOne))
+            currentPlayer = playerTwo;
         else
-            currentPlayer = "A";
+            currentPlayer = playerOne;
     }
 
 //    method which checks for all the possible winning positions
