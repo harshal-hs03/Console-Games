@@ -2,6 +2,7 @@ package com.realapps.games;
 
 import com.realapps.games.fourinarow.FourInARow;
 import com.realapps.games.hangman.Hangman;
+import com.realapps.games.rockpaperscissor.RockPaperScissor;
 
 import java.util.Scanner;
 
@@ -20,13 +21,14 @@ public class StartPointForAllGames {
         System.out.println("Type in the name or number of the game you want to play from the below list : ");
         System.out.println("1. Four - In - A - Row");
         System.out.println("2. Hangman");
-        System.out.println("3. Exit");
+        System.out.println("3. Rock - Paper - Scissor");
+        System.out.println("4. Exit");
     }
 
     private static void takeInputAndStartGame(){
         String input = sc.nextLine();
         switch (input) {
-            case "1", "Four - In - A - Row", "Four-In-A-Row", "four in a row", "Four In A Row" -> {
+            case "1", "Four - In - A - Row", "Four-In-A-Row", "four in a row", "Four In A Row", "f", "F" -> {
                 FourInARow.startGame();
                 displayPlayAgainOptions();
             }
@@ -34,7 +36,11 @@ public class StartPointForAllGames {
                 Hangman.startGame();
                 displayPlayAgainOptions();
             }
-            case "3", "quit", "q", "Quit", "Exit", "exit" -> System.out.println("Exiting the game.");
+            case "3", "Rock-Paper-Scissor", "Rock - Paper - Scissor", "rps", "r p s", "RPS", "r", "R" -> {
+                RockPaperScissor.startGame();
+                displayPlayAgainOptions();
+            }
+            case "4", "quit", "q", "Quit", "Exit", "exit" -> System.out.println("Exiting the game.");
             default -> {
                 System.out.println("Please enter a valid input !\n");
                 displayListOfGameOptions();
